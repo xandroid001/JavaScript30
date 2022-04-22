@@ -42,7 +42,25 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
 
+  function logText(e){
+    console.log(this.classList.value);
+    //e.stopPropagation(); //this remove the BUBBLING so the eventListener will only fire on one div of the stack, still depends on CAPTURE.
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false, //this reverse the BUBBLING order.
+    once: true //this make the eventListener fire only ONCE on the targeted div.
+  }));
+
+  button.addEventListener('click', () => console.log('Click'), {
+    once: true
+  });
+//document.addEventListener('click', e => console.log(e.target))
+
+  
 </script>
 </body>
 </html>
